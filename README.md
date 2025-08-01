@@ -3,6 +3,12 @@
 ## About
 To document findings from reverse engineering, it can be helpful to reference sections of a binary analyzed in Ghidra. This Ghidra plugin adds support for links that cause a listing view navigation when clicked.
 
+
+
+https://github.com/user-attachments/assets/ccfe7a5a-f0c0-42c5-bf6d-db93994eac1f
+
+
+
 The GhidraLinkPlugin listens for urls of the form `ghidra://filename#address` sent to the socket on port 24437. 
 If `filename` is the name of a program file in the open Ghidra project, this file is opened in the current tool and `address` is navigated to. The file may be nested inside folders in the Ghidra project, so long as its name is distinct.
 
