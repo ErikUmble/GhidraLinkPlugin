@@ -35,9 +35,21 @@ the link to be sent to that socket. Use any of the following configurations, dep
 1. Run `xdg-settings set default-url-scheme-handler ghidra ghidra.desktop`
 
 ### Windows
+Warning: I've experienced issues with the 24437 port on Windows. I find WSL (with the above Linux setup) to work better out of the box.
 1. Copy `ghidra_open_link.pyw` to a permanent location, such as `C:\Scripts\`
 1. Modify the command in `ghidra.reg` to match the paths of your Python installation and the location of `ghidra_open_link.pyw`
 1. Run `ghidra.reg` by double clicking and confirming to add to registry
 
 ### VS Code
-Unfortunately, VS code does not yet support custom url protocols yet. A longstanding [issue](https://github.com/microsoft/vscode/issues/133278) for this exists, so it may work natively (using xdg-open, start, etc. based on the OS) in the future. I have tried using a markdown plugin to render ghidra links as VS commands, but this does not work in jupyter notebook cells. I've also tried creating a Code Lens popup on ghidra links, which works well for markdown and jupyer cells in edit mode, but not in preview mode. I also tried making a custom document link provider, but this similarly fails in the rendered markdown. For now, it seems best to use jupyter code cells using `xdg-opn` (or `echo <link> | nc localhost 24437`).
+Unfortunately, VS code does not yet support custom url protocols yet. A longstanding [issue](https://github.com/microsoft/vscode/issues/133278) for this exists, so it may work natively (using xdg-open, start, etc. based on the OS) in the future. 
+
+The best approach I came up with was [this extension](https://github.com/ErikUmble/VSGhidraLink). As shown in the demo video above, this enables code hints for each Ghidra link found, and clicking these forwards the link to Ghidra.
+
+Alternatively, you can use code cells with
+```bash
+xdg-open <link>
+```
+or 
+```bash
+echo <link> | nc localhost 24437
+```
